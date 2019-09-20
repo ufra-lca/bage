@@ -8,7 +8,7 @@ import {
 import Home from '../screens/Home'
 import { Icon } from 'react-native-elements'
 import { Color, TextStyle } from '../styles'
-import { TouchableOpacity, Alert } from 'react-native'
+import { TouchableOpacity, Alert, View } from 'react-native'
 
 const HomeStack = createStackNavigator(
   {
@@ -17,7 +17,9 @@ const HomeStack = createStackNavigator(
       navigationOptions: ({ navigation }) => {
         return {
           headerTitle: 'Onde Na UFRA',
-          headerLeft: null,
+          headerLeft: (
+            <View />
+          ),
           headerRight: (
             <TouchableOpacity
               onPress={navigation.getParam('horaBage')}
@@ -45,7 +47,8 @@ const HomeStack = createStackNavigator(
         alignSelf: 'center',
         textAlign: 'center',
         justifyContent: 'center',
-        flex: 1
+        flex: 1,
+        fontSize: 30
       },
       headerTintColor: Color.white
     }
