@@ -1,4 +1,4 @@
-package com.reactnative;
+package com.ondenaufra;
 
 import android.app.Application;
 
