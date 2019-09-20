@@ -1,13 +1,45 @@
 import React, { PureComponent } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import MapView from 'react-native-maps'
+import BageMarker from '../components/BageMarker';
+import { connectSocket } from '../config/socket';
 
 export default class Home extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      marginTop: 1
+      bages: {},
+      marginTop: 1,
+      update: false
     };
+  }
+
+  updateBage = (bage) => {
+    const bages = this.state.bages
+    bages[bage.id] = bage
+    this.setState({ bages, update: !this.state.update })
+  }
+
+  renderBages() {
+    const markers = [];
+    bages = Object.keys(this.state.bages)
+    bages.forEach(element => {
+      const bage = this.state.bages[element]
+      const marker = (
+        <BageMarker
+          key={bage.id}
+          id={bage.id}
+          latitude={bage.latitude}
+          longitude={bage.longitude}
+        />
+      );
+      markers.push(marker);
+    });
+    return markers;
+  }
+
+  componentDidMount() {
+    connectSocket((bage) => this.updateBage(bage))
   }
   render() {
     return (
@@ -21,6 +53,7 @@ export default class Home extends PureComponent {
 
           }}
           onMapReady={() => this.setState({ marginTop: 0 })}>
+          {this.renderBages()}
         </MapView>
       </View>
     );

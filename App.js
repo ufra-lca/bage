@@ -15,9 +15,6 @@ import { connectSocket } from './app/config/socket';
 
 export default class App extends Component {
 
-  componentDidMount() {
-    connectSocket()
-  }
   render() {
     return (
       <Provider store={store}>
