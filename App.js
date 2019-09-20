@@ -10,14 +10,19 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux'
 import store from './app/redux/store'
 import Tabs from './app/config/routes';
+import { connectSocket } from './app/config/socket';
 
 
 export default class App extends Component {
+
+  componentDidMount() {
+    connectSocket()
+  }
   render() {
     return (
       <Provider store={store}>
         <Tabs />
-        </Provider>
+      </Provider>
     );
   }
 }
