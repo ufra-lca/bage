@@ -1,14 +1,15 @@
-import React from 'react'
+import React from "react";
 
 import {
-  createBottomTabNavigator,
   createAppContainer,
-  createStackNavigator
-} from 'react-navigation'
-import Home from '../screens/Home'
-import { Icon } from 'react-native-elements'
-import { Color, TextStyle } from '../styles'
-import { TouchableOpacity, Alert, View } from 'react-native'
+  createStackNavigator,
+  createMaterialTopTabNavigator
+} from "react-navigation";
+import Home from "../screens/Home";
+import { Icon } from "react-native-elements";
+import { Color, TextStyle } from "../styles";
+import { TouchableOpacity, Alert, View } from "react-native";
+import Info from "../screens/Info";
 
 const HomeStack = createStackNavigator(
   {
@@ -16,23 +17,8 @@ const HomeStack = createStackNavigator(
       screen: Home,
       navigationOptions: ({ navigation }) => {
         return {
-          headerTitle: 'Onde Na UFRA',
-          headerLeft: (
-            <View />
-          ),
-          headerRight: (
-            <TouchableOpacity
-              onPress={navigation.getParam('horaBage')}
-            >
-              <Icon
-                name={'information-outline'}
-                size={25}
-                color={'white'}
-                type={'material-community'}
-              />
-            </TouchableOpacity>
-          ),
-        }
+          header: null
+        };
       }
     }
   },
@@ -44,27 +30,57 @@ const HomeStack = createStackNavigator(
       },
       headerTitleStyle: {
         ...TextStyle.header,
-        alignSelf: 'center',
-        textAlign: 'center',
-        justifyContent: 'center',
+        alignSelf: "center",
+        textAlign: "center",
+        justifyContent: "center",
         flex: 1,
         fontSize: 30
       },
       headerTintColor: Color.white
     }
   }
-)
-const TabNavigator = createBottomTabNavigator(
+);
+const InfoStack = createStackNavigator(
+  {
+    Info: {
+      screen: Info,
+      navigationOptions: ({ navigation }) => {
+        return {
+          header: null
+        };
+      }
+    }
+  },
+  {
+    /* The header config from HomeScreen is now here */
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: Color.primary
+      },
+      headerTitleStyle: {
+        ...TextStyle.header,
+        alignSelf: "center",
+        textAlign: "center",
+        justifyContent: "center",
+        flex: 1,
+        fontSize: 30
+      },
+      headerTintColor: Color.white
+    }
+  }
+);
+const TabNavigator = createMaterialTopTabNavigator(
   {
     Bagé: HomeStack,
+    Informações: InfoStack
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
-        const { routeName } = navigation.state
-        let iconName
-        if (routeName === 'Bagé') {
-          iconName = `bus`
+        const { routeName } = navigation.state;
+        let iconName;
+        if (routeName === "Bagé") {
+          iconName = `bus`;
           // Sometimes we want to add badges to some icons.
           // You can check the implementation below.
         }
@@ -74,18 +90,27 @@ const TabNavigator = createBottomTabNavigator(
             name={iconName}
             size={25}
             color={tintColor}
-            type={'material-community'}
+            type={"material-community"}
           />
-        )
+        );
       }
     }),
     tabBarOptions: {
       activeTintColor: Color.white,
-      inactiveTintColor: 'gray',
+      inactiveTintColor: "gray",
       activeBackgroundColor: Color.primary,
-      inactiveBackgroundColor: Color.primary
+      inactiveBackgroundColor: Color.primary,
+      style: {
+        backgroundColor: "green"
+      },
+      indicatorStyle: {
+        backgroundColor: "white"
+      },
+      labelStyle: {
+        color: "white"
+      }
     }
   }
-)
+);
 
-export default createAppContainer(TabNavigator)
+export default createAppContainer(TabNavigator);
