@@ -90,6 +90,27 @@ export default class Home extends PureComponent {
             <Icon name='map-marker' type='material-community' color='black' size={25} />
           </Marker>
 
+          <Marker  //PARADA EM FRENTE A BIBLIOTECA
+            coordinate={{ latitude: -1.456674, longitude: -48.434359 }}
+            title='Ponto Biblioteca - Bagé'
+          >
+            <Icon name='map-marker' type='material-community' color='black' size={25} />
+          </Marker>
+
+          <Marker  //PARADA Banco do Brasil
+            coordinate={{ latitude: -1.458032, longitude: -48.435727 }}
+            title='Ponto Banco do Brasil - Bagé'
+          >
+            <Icon name='map-marker' type='material-community' color='black' size={25} />
+          </Marker>
+
+          <Marker  //PARADA em um predio ai
+            coordinate={{ latitude: -1.458757, longitude: -48.436740 }}
+            title='Ponto Garagem - Bagé'
+          >
+            <Icon name='map-marker' type='material-community' color='black' size={25} />
+          </Marker>
+
           <Polyline
             coordinates={[ //ZOOTECNIA
               { latitude: -1.454132, longitude: -48.438176 },
@@ -171,6 +192,13 @@ export default class Home extends PureComponent {
               { latitude: -1.454321, longitude: -48.444793 }, // Pavilhão - Volta
               { latitude: -1.454685, longitude: -48.445486 }, // Cruzamento terminal - Volta
               { latitude: -1.454579, longitude: -48.445695 }, // Rotatória Terminal
+              { latitude: -1.454561, longitude: -48.445772 }, // Rotatória Terminal
+              { latitude: -1.454583, longitude: -48.445848 }, // Rotatória Terminal
+              { latitude: -1.454619, longitude: -48.445874 }, // Rotatória Terminal
+              { latitude: -1.454703, longitude: -48.445872 }, // Rotatória Terminal
+              { latitude: -1.454797, longitude: -48.445836 }, // Rotatória Terminal
+              { latitude: -1.454786, longitude: -48.445709 }, // Rotatória Terminal
+              { latitude: -1.454758, longitude: -48.445635 }, // Terminal Bagé
 
 
 
