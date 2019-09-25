@@ -13,8 +13,11 @@ export default class Home extends PureComponent {
       bages: {},
       marginTop: 1,
       update: false,
-      lat_bage: -1.454202,
-      long_bage: -48.438036
+
+      latitude: -1.454202,
+      longitude: -48.438036,
+      latitudeDelta: 0.015,
+      longitudeDelta: 0.0121,
     };
   }
 
@@ -53,13 +56,19 @@ export default class Home extends PureComponent {
       <View style={styles.container}>
         <MapView style={[styles.map, { marginTop: this.state.marginTop }]}
           region={{
-            latitude: this.state.lat_bage,
-            longitude: this.state.long_bage,
+            latitude: this.state.latitude,
+            longitude: this.state.longitude,
             latitudeDelta: 0.015,
             longitudeDelta: 0.0121,
 
           }}
+
+          onRegionChange = {(region) => {
+            const {latitude,longitude, longitudeDelta,latitudeDelta} = region;
+            this.setState({latitude,latitudeDelta,longitude,longitudeDelta});
+          } } 
           onMapReady={() => this.setState({ marginTop: 0 })}>
+          
           {this.renderBages()}
 
           <Marker  //PORTÃO PRINCIPAL
