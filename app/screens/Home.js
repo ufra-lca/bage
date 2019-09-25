@@ -31,15 +31,18 @@ export default class Home extends PureComponent {
     bages = Object.keys(this.state.bages)
     bages.forEach(element => {
       const bage = this.state.bages[element]
-      const marker = (
-        <BageMarker
-          key={bage.id}
-          id={bage.id}
-          latitude={bage.latitude}
-          longitude={bage.longitude}
-        />
-      );
-      markers.push(marker);
+      if (bage.rodando) {
+        const marker = (
+          <BageMarker
+            key={bage.id}
+            id={bage.id}
+            latitude={bage.latitude}
+            longitude={bage.longitude}
+          />
+        );
+        markers.push(marker);
+      }
+
     });
     return markers;
   }
@@ -59,7 +62,9 @@ export default class Home extends PureComponent {
             longitudeDelta: 0.0121,
 
           }}
-          onMapReady={() => this.setState({ marginTop: 0 })}>
+          onMapReady={() => this.setState({ marginTop: 0 })}
+          onRegionChange={(region)}
+        >
           {this.renderBages()}
 
           <Marker  //PORTÃO PRINCIPAL
