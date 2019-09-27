@@ -1,6 +1,6 @@
 import axios from "axios";
-const hostUrl = "http://b6bd7dce.ngrok.io";
-
+//const hostUrl = "http://b6bd7dce.ngrok.io";
+const hostUrl = "localhost:4000";
 const defaultOptions = {
   baseURL: hostUrl,
   headers: {
@@ -34,4 +34,4 @@ Api.interceptors.request.use(function (config) {
   }
   return config;
 });
-export default api;
+export default Api;
