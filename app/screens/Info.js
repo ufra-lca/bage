@@ -1,8 +1,9 @@
 import React, { PureComponent } from "react";
-import { View, FlatList } from "react-native";
+import { View, FlatList, StyleSheet } from "react-native";
 import { Text, Image } from "react-native-elements";
 import HorarioItem from "../components/HorarioItem";
 import HorarioHeader from "../components/HorarioHeader";
+import axios from "axios";
 
 export default class Info extends PureComponent {
   constructor(props) {
