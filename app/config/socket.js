@@ -1,7 +1,7 @@
 import { Socket } from 'phoenix'
 
 export function connectSocket(onUpdate) {
-    const ROOT_SOCKET = 'http://99053fcf.ngrok.io/socket';
+    const ROOT_SOCKET = 'http://b6bd7dce.ngrok.io/socket';
     socket = new Socket(`${ROOT_SOCKET}`, {});
     socket.connect()
 

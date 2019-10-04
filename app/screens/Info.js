@@ -5,7 +5,36 @@ import HorarioItem from "../components/HorarioItem";
 import HorarioHeader from "../components/HorarioHeader";
 
 export default class Info extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      horarios: {}
+    };
+  }
+
+  getHorarios = () => {
+    const apiHorarios = "http://10.11.85.139:4000/api/horarios";
+    console.log("Api:", apiHorarios);
+    axios
+      .get(apiHorarios)
+      .then(response => {
+        const horarios = response.data.data;
+        horarios.map(horario => {
+          console.log(horario.hora_fim);
+        });
+        this.setState({ horarios });
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
+  };
+
+  componentDidMount() {
+    this.getHorarios();
+  }
   render() {
+    const { horarios } = this.state;
+
     return (
       <View
         style={{
@@ -90,3 +119,15 @@ export default class Info extends PureComponent {
     );
   }
 }
+const styles = StyleSheet.create({
+  item: {
+    alignItems: "center",
+    backgroundColor: "#dcda48",
+    flexGrow: 1,
+    margin: 4,
+    padding: 20
+  },
+  text: {
+    color: "#333333"
+  }
+});
