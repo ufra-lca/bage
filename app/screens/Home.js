@@ -35,9 +35,7 @@ export default class Home extends PureComponent {
       long_bage: bage.longitude
     });
   };
-  horarioBage = () => {
-    Alert.alert("BAGÉ PASSA A HORA QUE QUER");
-  };
+
   renderBages() {
     const markers = [];
     bages = Object.keys(this.state.bages);
@@ -60,7 +58,6 @@ export default class Home extends PureComponent {
 
   renderParadaMark(paradaMark) {
     const { coordinate, title } = paradaMark;
-    console.log("Homecoordinate", coordinate)
     return <ParadaMarker coordinate={coordinate} title={title} />
 
 
@@ -68,7 +65,6 @@ export default class Home extends PureComponent {
 
   componentDidMount() {
     connectSocket(bage => this.updateBage(bage));
-    this.props.navigation.setParams({ horaBage: this.horarioBage });
   }
   render() {
     const { paradasMark } = this.state;
@@ -89,7 +85,6 @@ export default class Home extends PureComponent {
               longitudeDelta,
               latitudeDelta
             } = region;
-            console.log("Region é", region);
             this.setState({
               latitude,
 
