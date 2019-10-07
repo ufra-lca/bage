@@ -37,7 +37,7 @@ export default class HorarioItem extends PureComponent {
             width: "50%"
           }}
         >
-          {/*itinerario +*/ (zootec ? "Via Zootecnia" : "")}
+          {itinerario + (zootec ? "(Via Zootecnia)" : "")}
         </Text>
         <Text
           style={{

@@ -53,7 +53,7 @@ export default class Info extends PureComponent {
             data={this.state.horarios}
             renderItem={({ item }) => (
               <HorarioItem
-                s={item.itinerario}
+                itinerario={item.itinerario}
                 zootec={item.zootec}
                 inicio={item.hora_inicio}
                 fim={item.hora_fim}
