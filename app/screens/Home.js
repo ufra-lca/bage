@@ -80,8 +80,8 @@ export default class Home extends PureComponent {
           region={{
             latitude: this.state.latitude,
             longitude: this.state.longitude,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121
+            latitudeDelta: this.state.latitudeDelta,
+            longitudeDelta: this.state.longitudeDelta
           }}
           onRegionChangeComplete={region => {
             const {
