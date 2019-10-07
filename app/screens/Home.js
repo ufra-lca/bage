@@ -3,8 +3,7 @@ import { View, StyleSheet, Alert } from "react-native";
 import MapView, { Polyline } from "react-native-maps";
 import BageMarker from "../components/BageMarker";
 import { connectSocket } from "../config/socket";
-import { Icon } from "react-native-elements";
-import { coordsRota, coordsZootec, paradasMark } from '../config/geo'
+import { coordsRota, coordsZootec, paradasMark, mapaStyle } from '../config/geo'
 import ParadaMarker from '../components/ParadaMarker'
 export default class Home extends PureComponent {
   constructor(props) {
@@ -57,10 +56,11 @@ export default class Home extends PureComponent {
     });
     return markers;
   }
-
+  renderParadas() {
+    return this.state.paradasMark.map((paradaMark) => this.renderParadaMark(paradaMark))
+  }
   renderParadaMark(paradaMark) {
     const { coordinate, title } = paradaMark;
-    console.log("Homecoordinate", coordinate)
     return <ParadaMarker coordinate={coordinate} title={title} />
 
 
@@ -75,6 +75,7 @@ export default class Home extends PureComponent {
     return (
       <View style={styles.container}>
         <MapView
+          customMapStyle={mapaStyle}
           style={[styles.map, { marginTop: this.state.marginTop }]}
           region={{
             latitude: this.state.latitude,
@@ -100,7 +101,7 @@ export default class Home extends PureComponent {
           }}
         >
           {this.renderBages()}
-          {paradasMark.map((paradaMark) => this.renderParadaMark(paradaMark))}
+          {this.renderParadas()}
 
           <Polyline
             coordinates={coordsZootec}

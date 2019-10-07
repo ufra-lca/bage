@@ -5,11 +5,10 @@ export default class ParadaMarker extends PureComponent {
 
 
     render() {
-        const { coordinate, title } = this.props;
-        const { latitude, longitude } = coordinate;
+        const { coordinate: { latitude, longitude }, title } = this.props;
         return (
             <Marker  //PORTÃO PRINCIPAL
-                coordinate={{ latitude: latitude, longitude: longitude }}
+                coordinate={{ latitude, longitude }}
                 title={title}
             >
                 <Icon name='map-marker' type='material-community' color='black' size={25} />
