@@ -108,5 +108,62 @@ export const paradasMark = [{
     coordinate: { latitude: -1.458757, longitude: -48.43674 },
     title: "Ponto Garagem - Bagé"
 },
+{
+    coordinate: { latitude: -1.459801, longitude: -48.435893 },
+    title: "Ponto Pesca - Bagé"
+},
+{
+    coordinate: { latitude: -1.459007, longitude: -48.434374 },
+    title: "Ponto Prédio Central - Bagé"
+},
+{
+    coordinate: { latitude: -1.457956, longitude: -48.432823 },
+    title: "Ponto Veterinário - Bagé"
+},
+{
+    coordinate: { latitude: -1.452879, longitude: -48.435771 },
+    title: "Ponto LTPF - Bagé"
+},
+{
+    coordinate: { latitude: -1.453299, longitude: -48.433691 },
+    title: "Ponto Zootecnia - Bagé"
+}
 
 ]
+export const mapaStyle =
+    [
+        {
+            "featureType": "administrative",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
+        {
+            "featureType": "poi",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
+        {
+            "featureType": "road",
+            "elementType": "labels.icon",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
+        {
+            "featureType": "transit",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        }
+    ]
