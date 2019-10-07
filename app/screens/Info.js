@@ -9,7 +9,7 @@ export default class Info extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      horarios: {}
+      horarios: []
     };
   }
 
@@ -20,10 +20,9 @@ export default class Info extends PureComponent {
       .get(apiHorarios)
       .then(response => {
         const horarios = response.data.data;
-        horarios.map(horario => {
-          console.log(horario.hora_fim);
-        });
         this.setState({ horarios });
+        console.log("API", horarios)
+        console.log("STATE", this.state.horarios)
       })
       .catch(error => {
         console.log(error.message);
@@ -32,9 +31,10 @@ export default class Info extends PureComponent {
 
   componentDidMount() {
     this.getHorarios();
+
+
   }
   render() {
-    const { horarios } = this.state;
 
     return (
       <View
@@ -50,52 +50,14 @@ export default class Info extends PureComponent {
             Horarios
           </Text>
           <FlatList
-            data={[
-              {
-                inicio: "07:00",
-                fim: "09:00",
-                label: "Ida e volta ao portão principal(Centro Esportivo)",
-                viagens: 8,
-                id: 1
-              },
-              {
-                inicio: "07:00",
-                fim: "09:00",
-                label:
-                  "Ida e volta ao portão principal(Centro Esportivo) via Zootecnia",
-                viagens: 8,
-                id: 2
-              },
-              {
-                inicio: "11:30",
-                fim: "14:30",
-                label:
-                  "Ida e volta ao portão principal(Centro Esportivo) via Zootecnia",
-                viagens: 8,
-                id: 3
-              },
-              {
-                inicio: "17:00",
-                fim: "18:00",
-                label:
-                  "Ida e volta ao portão principal(Centro Esportivo) via Zootecnia",
-                viagens: 8,
-                id: 4
-              },
-              {
-                inicio: "17:00",
-                fim: "19:00",
-                label: "Ida e volta ao portão principal(Centro Esportivo)",
-                viagens: 8,
-                id: 5
-              }
-            ]}
+            data={this.state.horarios}
             renderItem={({ item }) => (
               <HorarioItem
-                label={item.label}
-                inicio={item.inicio}
-                fim={item.fim}
-                viagens={item.viagens}
+                s={item.itinerario}
+                zootec={item.zootec}
+                inicio={item.hora_inicio}
+                fim={item.hora_fim}
+                viagens={item.n_voltas}
               />
             )}
             keyExtractor={item => item.id.toString()}
