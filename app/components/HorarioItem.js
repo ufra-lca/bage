@@ -4,7 +4,7 @@ import { Text } from "react-native-elements";
 
 export default class HorarioItem extends PureComponent {
   render() {
-    const { label, inicio, fim, viagens } = this.props;
+    const { itinerario, zootec, inicio, fim, viagens } = this.props;
     return (
       <View
         style={{
@@ -37,7 +37,7 @@ export default class HorarioItem extends PureComponent {
             width: "50%"
           }}
         >
-          {label}
+          {/*itinerario +*/ (zootec ? "Via Zootecnia" : "")}
         </Text>
         <Text
           style={{
