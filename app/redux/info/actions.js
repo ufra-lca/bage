@@ -1,5 +1,5 @@
-export const SET_HORARIO = 'SET_HORARIO';
-export const setHorario = (horario) => ({
-    type: SET_HORARIO,
-    payload: horario
+export const SET_HORARIOS = 'SET_HORARIOS';
+export const setHorarios = (horarios) => ({
+    type: SET_HORARIOS,
+    payload: horarios
 })

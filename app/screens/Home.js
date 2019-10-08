@@ -34,9 +34,7 @@ export default class Home extends PureComponent {
       long_bage: bage.longitude
     });
   };
-  horarioBage = () => {
-    Alert.alert("BAGÉ PASSA A HORA QUE QUER");
-  };
+
   renderBages() {
     const markers = [];
     bages = Object.keys(this.state.bages);
@@ -68,12 +66,6 @@ export default class Home extends PureComponent {
 
   componentDidMount() {
     connectSocket(bage => this.updateBage(bage));
-    this.props.navigation.setParams({ horaBage: this.horarioBage });
-
-  }
-
-  updateMapStyling() {
-    this.setState({ customMapStyle: { flex: 1 } });
   }
 
   render() {
@@ -102,7 +94,6 @@ export default class Home extends PureComponent {
               longitudeDelta,
               latitudeDelta
             } = region;
-            console.log("Region é", region);
             this.setState({
 
               latitude,

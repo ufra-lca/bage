@@ -1,5 +1,5 @@
-export const SET_NOME = 'SET_NOME';
-export const setNome = (nome) => ({
-  type: SET_NOME,
-  payload: nome
+export const SET_IS_CONNECTED = 'SET_IS_CONNECTED';
+export const setIsConnected = (isConnected) => ({
+  type: SET_IS_CONNECTED,
+  payload: isConnected
 })

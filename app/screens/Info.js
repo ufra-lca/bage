@@ -4,8 +4,10 @@ import { Text, Image } from "react-native-elements";
 import HorarioItem from "../components/HorarioItem";
 import HorarioHeader from "../components/HorarioHeader";
 import axios from "axios";
+import { connect } from 'react-redux';
+import { setHorarios } from '../redux/info/actions'
 
-export default class Info extends PureComponent {
+class Info extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,28 +17,27 @@ export default class Info extends PureComponent {
 
   getHorarios = () => {
     const apiHorarios = "http://10.11.85.139:4000/api/horarios";
-    console.log("Api:", apiHorarios);
     axios
       .get(apiHorarios)
       .then(response => {
         const horarios = response.data.data;
-        this.setState({ horarios });
-        console.log("API", horarios)
-        console.log("STATE", this.state.horarios)
+        this.props.dispatch(setHorarios({ horarios }))
+
       })
       .catch(error => {
-        console.log(error.message);
+
+        console.log('erro', error.message);
       });
   };
 
   componentDidMount() {
     this.getHorarios();
 
-
   }
   render() {
-
+    const { horarios } = this.props
     return (
+
       <View
         style={{
           flex: 1,
@@ -50,7 +51,8 @@ export default class Info extends PureComponent {
             Horarios
           </Text>
           <FlatList
-            data={this.state.horarios}
+
+            data={horarios.horarios}
             renderItem={({ item }) => (
               <HorarioItem
                 itinerario={item.itinerario}
@@ -94,3 +96,13 @@ const styles = StyleSheet.create({
     color: "#333333"
   }
 });
+export const mapStateToProps = state => {
+  const { horarios } = state.info
+
+  return {
+    horarios,
+  }
+
+}
+
+export default connect(mapStateToProps)(Info);
