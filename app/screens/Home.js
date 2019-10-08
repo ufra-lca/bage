@@ -10,7 +10,7 @@ export default class Home extends PureComponent {
     super(props);
     this.state = {
       bages: {},
-      marginTop: 1,
+      marginTop: 0,
       update: false,
 
       latitude: -1.454202,
@@ -69,20 +69,32 @@ export default class Home extends PureComponent {
   componentDidMount() {
     connectSocket(bage => this.updateBage(bage));
     this.props.navigation.setParams({ horaBage: this.horarioBage });
+
   }
+
+  updateMapStyling() {
+    this.setState({ customMapStyle: { flex: 1 } });
+  }
+
   render() {
     const { paradasMark } = this.state;
     return (
       <View style={styles.container}>
         <MapView
+          rotateEnabled={false}
+          showsUserLocation={true}
+          showsMyLocationButton={true}
           customMapStyle={mapaStyle}
           style={[styles.map, { marginTop: this.state.marginTop }]}
+          onMapReady={() => this.setState({ marginTop: 1 })}
           region={{
             latitude: this.state.latitude,
             longitude: this.state.longitude,
             latitudeDelta: this.state.latitudeDelta,
             longitudeDelta: this.state.longitudeDelta
+
           }}
+
           onRegionChangeComplete={region => {
             const {
               latitude,
@@ -92,8 +104,8 @@ export default class Home extends PureComponent {
             } = region;
             console.log("Region é", region);
             this.setState({
-              latitude,
 
+              latitude,
               longitude,
               longitudeDelta,
               latitudeDelta
