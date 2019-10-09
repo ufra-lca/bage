@@ -97,16 +97,21 @@ export const paradasMark = [{
     title: "Parada ICA - Bagé"
 },
 {
+    coordinate: { latitude: -1.454996, longitude: -48.436843 },
+    title: "Parada STIC - Bagé"
+},
+{
     coordinate: { latitude: -1.456674, longitude: -48.434359 },
     title: "Ponto Biblioteca - Bagé"
 },
-{
-    coordinate: { latitude: -1.458032, longitude: -48.435727 },
-    title: "Ponto Banco do Brasil - Bagé"
-},
+
 {
     coordinate: { latitude: -1.458757, longitude: -48.43674 },
-    title: "Ponto Garagem - Bagé"
+    title: "Ponto Garagem/BB - Bagé"
+},
+{
+    coordinate: { latitude: -1.460053, longitude: -48.436546 },
+    title: "Ponto Letras/Libras - Bagé"
 },
 {
     coordinate: { latitude: -1.459801, longitude: -48.435893 },
@@ -127,17 +132,89 @@ export const paradasMark = [{
 {
     coordinate: { latitude: -1.453299, longitude: -48.433691 },
     title: "Ponto Zootecnia - Bagé"
+},
+{
+    coordinate: { latitude: -1.456889, longitude: -48.433980 },
+    title: "Ponto RU - Bagé"
 }
 
 ]
 export const mapaStyle =
     [
+
+        {
+            "elementType": "labels",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
         {
             "featureType": "administrative",
             "elementType": "geometry",
             "stylers": [
                 {
+                    "saturation": -75
+                },
+                {
+                    "lightness": -50
+                },
+                {
                     "visibility": "off"
+                },
+                {
+                    "weight": 6.5
+                }
+            ]
+        },
+        {
+            "featureType": "administrative",
+            "elementType": "geometry.fill",
+            "stylers": [
+                {
+                    "saturation": 100
+                },
+                {
+                    "visibility": "on"
+                }
+            ]
+        },
+        {
+            "featureType": "administrative.neighborhood",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
+        {
+            "featureType": "landscape.man_made",
+            "elementType": "geometry.fill",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
+        {
+            "featureType": "landscape.man_made",
+            "elementType": "geometry.stroke",
+            "stylers": [
+                {
+                    "saturation": -100
+                },
+                {
+                    "lightness": 100
+                }
+            ]
+        },
+        {
+            "featureType": "landscape.natural.landcover",
+            "elementType": "geometry.stroke",
+            "stylers": [
+                {
+                    "visibility": "simplified"
                 }
             ]
         },
@@ -165,5 +242,15 @@ export const mapaStyle =
                     "visibility": "off"
                 }
             ]
+        },
+        {
+            "featureType": "transit.station",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "visibility": "on"
+                }
+            ]
         }
+
     ]

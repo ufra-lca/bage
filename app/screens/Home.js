@@ -4,7 +4,8 @@ import MapView, { Polyline } from "react-native-maps";
 import BageMarker from "../components/BageMarker";
 import { connectSocket } from "../config/socket";
 import { coordsRota, coordsZootec, paradasMark, mapaStyle } from '../config/geo'
-import ParadaMarker from '../components/ParadaMarker'
+import ParadaMarker from "../components/ParadaMarker";
+import { LegendaMap } from '../components/LegendaMap'
 export default class Home extends PureComponent {
   constructor(props) {
     super(props);
@@ -60,8 +61,9 @@ export default class Home extends PureComponent {
   renderParadaMark(paradaMark) {
     const { coordinate, title } = paradaMark;
     return <ParadaMarker coordinate={coordinate} title={title} />
-
-
+  }
+  renderLegendaMaps = () => {
+    return <LegendaMap />
   }
 
   componentDidMount() {
@@ -106,6 +108,7 @@ export default class Home extends PureComponent {
           {this.renderBages()}
           {this.renderParadas()}
 
+
           <Polyline
             coordinates={coordsZootec}
             strokeColor="red"
@@ -119,6 +122,7 @@ export default class Home extends PureComponent {
           />
 
         </MapView>
+        {this.renderLegendaMaps()}
       </View>
     );
   }
