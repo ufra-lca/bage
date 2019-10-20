@@ -1,17 +1,24 @@
 import React, { PureComponent } from "react";
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import MapView, { Polyline } from "react-native-maps";
 import BageMarker from "../components/BageMarker";
 import { connectSocket } from "../config/socket";
-import { coordsRota, coordsZootec, paradasMark, mapaStyle } from '../config/geo'
+import {
+  coordsRota,
+  coordsZootec,
+  paradasMark,
+  mapaStyle
+} from "../config/geo";
 import ParadaMarker from "../components/ParadaMarker";
-import { LegendaMap } from '../components/LegendaMap'
+import { LegendaMap } from "../components/LegendaMap";
+import BageLegendaItem from "../components/BageLegendaItem";
+import { FlatList } from "react-native-gesture-handler";
 export default class Home extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       bages: {},
-      marginTop: 0,
+      marginTop: 1,
       update: false,
 
       latitude: -1.454202,
@@ -19,9 +26,7 @@ export default class Home extends PureComponent {
       latitudeDelta: 0.015,
       longitudeDelta: 0.0121,
 
-      paradasMark: paradasMark
-
-
+      paradasMark
     };
   }
 
@@ -56,15 +61,17 @@ export default class Home extends PureComponent {
     return markers;
   }
   renderParadas() {
-    return this.state.paradasMark.map((paradaMark) => this.renderParadaMark(paradaMark))
+    return this.state.paradasMark.map(paradaMark =>
+      this.renderParadaMark(paradaMark)
+    );
   }
   renderParadaMark(paradaMark) {
     const { coordinate, title } = paradaMark;
-    return <ParadaMarker coordinate={coordinate} title={title} />
+    return <ParadaMarker coordinate={coordinate} title={title} />;
   }
   renderLegendaMaps = () => {
-    return <LegendaMap />
-  }
+    return <LegendaMap />;
+  };
 
   componentDidMount() {
     connectSocket(bage => this.updateBage(bage));
@@ -74,21 +81,22 @@ export default class Home extends PureComponent {
     const { paradasMark } = this.state;
     return (
       <View style={styles.container}>
+        <Text>Horarios</Text>
         <MapView
           rotateEnabled={false}
           showsUserLocation={true}
           showsMyLocationButton={true}
           customMapStyle={mapaStyle}
-          style={[styles.map, { marginTop: this.state.marginTop }]}
-          onMapReady={() => this.setState({ marginTop: 1 })}
+          style={[
+            { marginTop: this.state.marginTop, width: "100%", height: "65%" }
+          ]}
+          onMapReady={() => this.setState({ marginTop: 0 })}
           region={{
             latitude: this.state.latitude,
             longitude: this.state.longitude,
             latitudeDelta: this.state.latitudeDelta,
             longitudeDelta: this.state.longitudeDelta
-
           }}
-
           onRegionChangeComplete={region => {
             const {
               latitude,
@@ -97,7 +105,6 @@ export default class Home extends PureComponent {
               latitudeDelta
             } = region;
             this.setState({
-
               latitude,
               longitude,
               longitudeDelta,
@@ -107,7 +114,6 @@ export default class Home extends PureComponent {
         >
           {this.renderBages()}
           {this.renderParadas()}
-
 
           <Polyline
             coordinates={coordsZootec}
@@ -120,24 +126,23 @@ export default class Home extends PureComponent {
             strokeColor="blue"
             strokeWidth={3}
           />
-
         </MapView>
-        {this.renderLegendaMaps()}
+        <View style={{ flexDirection: "row", flex: 1 }}>
+          <FlatList
+            data={[1, 2]}
+            renderItem={() => <BageLegendaItem sentido />}
+          />
+          <FlatList
+            data={[1, 2]}
+            renderItem={() => <BageLegendaItem zootec />}
+          />
+        </View>
       </View>
     );
   }
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "flex-end"
-  },
-  map: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0
+    flex: 1
   }
 });

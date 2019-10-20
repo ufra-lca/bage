@@ -12,6 +12,7 @@ import { Provider } from 'react-redux'
 import makeStore from './app/redux/store'
 import Tabs from './app/config/routes';
 import { setIsConnected } from './app/redux/home/actions';
+import Home from './app/screens/Home';
 
 export default class App extends Component {
   constructor(props) {
@@ -53,7 +54,7 @@ export default class App extends Component {
     if (this.state.isLoaded) {
       return (
         <Provider store={this.state.store}>
-          <Tabs />
+          <Home/>
         </Provider>
       );
     } else {
