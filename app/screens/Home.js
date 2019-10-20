@@ -53,6 +53,7 @@ export default class Home extends PureComponent {
             id={bage.id}
             latitude={bage.latitude}
             longitude={bage.longitude}
+            zootec={bage.zootec}
           />
         );
         markers.push(marker);
@@ -78,7 +79,6 @@ export default class Home extends PureComponent {
   }
 
   render() {
-    const { paradasMark } = this.state;
     return (
       <View style={styles.container}>
         <Text>Horarios</Text>
@@ -127,15 +127,19 @@ export default class Home extends PureComponent {
             strokeWidth={3}
           />
         </MapView>
-        <View style={{ flexDirection: "row", flex: 1 }}>
+        <View
+          style={{
+            flexDirection: "row",
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
           <FlatList
             data={[1, 2]}
             renderItem={() => <BageLegendaItem sentido />}
           />
-          <FlatList
-            data={[1, 2]}
-            renderItem={() => <BageLegendaItem zootec />}
-          />
+          <FlatList data={[1]} renderItem={() => <BageLegendaItem zootec />} />
         </View>
       </View>
     );

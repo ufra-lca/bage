@@ -31,7 +31,7 @@ export default class BageLegendaItem extends PureComponent {
   }
   render() {
     return (
-      <View style={{ justifyContent: "center", alignItems: "center" }}>
+      <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
         <Text h4 style={{ textAlign: "center" }}>
           {this.renderTextSentido()}
         </Text>
