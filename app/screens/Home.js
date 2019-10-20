@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 import MapView, { Polyline } from "react-native-maps";
 import BageMarker from "../components/BageMarker";
 import { connectSocket } from "../config/socket";
@@ -12,7 +12,7 @@ import {
 import ParadaMarker from "../components/ParadaMarker";
 import { LegendaMap } from "../components/LegendaMap";
 import BageLegendaItem from "../components/BageLegendaItem";
-import { FlatList } from "react-native-gesture-handler";
+import { Text } from "react-native-elements";
 export default class Home extends PureComponent {
   constructor(props) {
     super(props);
@@ -108,6 +108,69 @@ export default class Home extends PureComponent {
     });
     return bages;
   };
+  renderBageLegends() {
+    const bageList = this.buildBageList();
+    const bageZooList = this.buildBageZooList();
+    if (bageList.length === 0 && bageZooList.length === 0) {
+      return (
+        <Text h1 style={{ textAlign: "center" }}>
+          Sem Bagés rodando no momento
+        </Text>
+      );
+    }
+    if (bageList.length !== 0 && bageZooList.length === 0) {
+      return (
+        <FlatList
+          data={bageList}
+          renderItem={({ item, index }) => (
+            <BageLegendaItem
+              sentido={item.sentido}
+              zootec={item.zootec}
+              index={index}
+            />
+          )}
+        />
+      );
+    }
+    if (bageList.length === 0 && bageZooList.length !== 0) {
+      return (
+        <FlatList
+          data={bageZooList}
+          renderItem={({ item, index }) => (
+            <BageLegendaItem
+              sentido={item.sentido}
+              zootec={item.zootec}
+              index={index}
+            />
+          )}
+        />
+      );
+    }
+    return (
+      <View style={{ flex: 1, flexDirection: "row" }}>
+        <FlatList
+          data={bageList}
+          renderItem={({ item, index }) => (
+            <BageLegendaItem
+              sentido={item.sentido}
+              zootec={item.zootec}
+              index={index}
+            />
+          )}
+        />
+        <FlatList
+          data={bageZooList}
+          renderItem={({ item, index }) => (
+            <BageLegendaItem
+              sentido={item.sentido}
+              zootec={item.zootec}
+              index={index}
+            />
+          )}
+        />
+      </View>
+    );
+  }
   componentDidMount() {
     connectSocket(bage => this.updateBage(bage));
   }
@@ -151,13 +214,13 @@ export default class Home extends PureComponent {
 
           <Polyline
             coordinates={coordsZootec}
-            strokeColor="red"
+            strokeColor="#ff4757"
             strokeWidth={3}
           />
 
           <Polyline
             coordinates={coordsRota}
-            strokeColor="blue"
+            strokeColor="#1e90ff"
             strokeWidth={3}
           />
         </MapView>
@@ -169,26 +232,7 @@ export default class Home extends PureComponent {
             alignItems: "center"
           }}
         >
-          <FlatList
-            data={this.buildBageList()}
-            renderItem={({ item, index }) => (
-              <BageLegendaItem
-                sentido={item.sentido}
-                zootec={item.zootec}
-                index={index}
-              />
-            )}
-          />
-          <FlatList
-            data={this.buildBageZooList()}
-            renderItem={() => (
-              <BageLegendaItem
-                sentido={item.sentido}
-                zootec={item.zootec}
-                index={index}
-              />
-            )}
-          />
+          {this.renderBageLegends()}
         </View>
       </View>
     );
