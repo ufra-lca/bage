@@ -3,8 +3,8 @@ import MapView from "react-native-maps";
 import { Icon, Image } from "react-native-elements";
 export default class BageMarker extends PureComponent {
   renderBageMarker() {
-    const height = 30;
-    const width = 21.6;
+    const height = 40;
+    const width = 28.8;
     const { zootec } = this.props;
     return zootec ? (
       <Image
