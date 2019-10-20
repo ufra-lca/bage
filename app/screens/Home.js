@@ -13,6 +13,7 @@ import ParadaMarker from "../components/ParadaMarker";
 import { LegendaMap } from "../components/LegendaMap";
 import BageLegendaItem from "../components/BageLegendaItem";
 import { Text } from "react-native-elements";
+import { keyExtractorByIndex } from "../config/utils";
 export default class Home extends PureComponent {
   constructor(props) {
     super(props);
@@ -121,6 +122,7 @@ export default class Home extends PureComponent {
     if (bageList.length !== 0 && bageZooList.length === 0) {
       return (
         <FlatList
+          keyExtractor={keyExtractorByIndex}
           data={bageList}
           renderItem={({ item, index }) => (
             <BageLegendaItem
@@ -135,6 +137,7 @@ export default class Home extends PureComponent {
     if (bageList.length === 0 && bageZooList.length !== 0) {
       return (
         <FlatList
+          keyExtractor={keyExtractorByIndex}
           data={bageZooList}
           renderItem={({ item, index }) => (
             <BageLegendaItem
@@ -149,6 +152,7 @@ export default class Home extends PureComponent {
     return (
       <View style={{ flex: 1, flexDirection: "row" }}>
         <FlatList
+          keyExtractor={keyExtractorByIndex}
           data={bageList}
           renderItem={({ item, index }) => (
             <BageLegendaItem
@@ -159,6 +163,7 @@ export default class Home extends PureComponent {
           )}
         />
         <FlatList
+          keyExtractor={keyExtractorByIndex}
           data={bageZooList}
           renderItem={({ item, index }) => (
             <BageLegendaItem
