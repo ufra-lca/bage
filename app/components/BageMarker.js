@@ -4,8 +4,8 @@ import { Image } from "react-native-elements";
 import { getBageZooMarker, getBageMarker } from "../config/bageIconRequires";
 export default class BageMarker extends PureComponent {
   renderBageMarker() {
-    const height = 30;
-    const width = 21.6;
+    const height = 40;
+    const width = 28.8;
     const { zootec } = this.props;
     return zootec ? (
       <Image source={getBageZooMarker(0)} style={{ height, width }} />

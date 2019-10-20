@@ -11,7 +11,7 @@ export default class ParadaMarker extends PureComponent {
                 coordinate={{ latitude, longitude }}
                 title={title}
             >
-                <Icon name='map-marker' type='material-community' color='black' size={25} />
+                <Icon name='map-marker' type='material-community' color='black' size={11} />
             </Marker>
         );
     }
