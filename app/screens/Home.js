@@ -43,10 +43,13 @@ export default class Home extends PureComponent {
 
   renderBages() {
     const markers = [];
+    let bageIndex = 0;
+    let bageZooIndex = 0;
     bages = Object.keys(this.state.bages);
     bages.forEach(element => {
       const bage = this.state.bages[element];
       if (bage.rodando) {
+        let index = bage.zootec ? bageZooIndex : bageIndex;
         const marker = (
           <BageMarker
             key={bage.id}
@@ -54,8 +57,14 @@ export default class Home extends PureComponent {
             latitude={bage.latitude}
             longitude={bage.longitude}
             zootec={bage.zootec}
+            index={index}
           />
         );
+        if (bage.zootec) {
+          bageZooIndex = bageZooIndex + 1;
+        } else {
+          bageIndex = bageIndex + 1;
+        }
         markers.push(marker);
       }
     });
@@ -73,7 +82,32 @@ export default class Home extends PureComponent {
   renderLegendaMaps = () => {
     return <LegendaMap />;
   };
-
+  buildBageList = () => {
+    const bages = [];
+    bagesList = Object.keys(this.state.bages);
+    bagesList.forEach(element => {
+      const bage = this.state.bages[element];
+      if (!bage.zootec) {
+        if (bage.rodando) {
+          bages.push(bage);
+        }
+      }
+    });
+    return bages;
+  };
+  buildBageZooList = () => {
+    const bages = [];
+    bagesList = Object.keys(this.state.bages);
+    bagesList.forEach(element => {
+      const bage = this.state.bages[element];
+      if (bage.zootec) {
+        if (bage.rodando) {
+          bages.push(bage);
+        }
+      }
+    });
+    return bages;
+  };
   componentDidMount() {
     connectSocket(bage => this.updateBage(bage));
   }
@@ -136,10 +170,25 @@ export default class Home extends PureComponent {
           }}
         >
           <FlatList
-            data={[1, 2]}
-            renderItem={() => <BageLegendaItem sentido />}
+            data={this.buildBageList()}
+            renderItem={({ item, index }) => (
+              <BageLegendaItem
+                sentido={item.sentido}
+                zootec={item.zootec}
+                index={index}
+              />
+            )}
           />
-          <FlatList data={[1]} renderItem={() => <BageLegendaItem zootec />} />
+          <FlatList
+            data={this.buildBageZooList()}
+            renderItem={() => (
+              <BageLegendaItem
+                sentido={item.sentido}
+                zootec={item.zootec}
+                index={index}
+              />
+            )}
+          />
         </View>
       </View>
     );

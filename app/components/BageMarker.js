@@ -6,11 +6,11 @@ export default class BageMarker extends PureComponent {
   renderBageMarker() {
     const height = 40;
     const width = 28.8;
-    const { zootec } = this.props;
+    const { zootec, index } = this.props;
     return zootec ? (
-      <Image source={getBageZooMarker(0)} style={{ height, width }} />
+      <Image source={getBageZooMarker(index)} style={{ height, width }} />
     ) : (
-      <Image source={getBageMarker(0)} style={{ height, width }} />
+      <Image source={getBageMarker(index)} style={{ height, width }} />
     );
   }
 
