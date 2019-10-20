@@ -12,8 +12,9 @@ import {
 import ParadaMarker from "../components/ParadaMarker";
 import { LegendaMap } from "../components/LegendaMap";
 import BageLegendaItem from "../components/BageLegendaItem";
-import { Text } from "react-native-elements";
+import { Text, Button } from "react-native-elements";
 import { keyExtractorByIndex } from "../config/utils";
+import HorariosModal from "./HorariosModal";
 export default class Home extends PureComponent {
   constructor(props) {
     super(props);
@@ -27,7 +28,8 @@ export default class Home extends PureComponent {
       latitudeDelta: 0.015,
       longitudeDelta: 0.0121,
 
-      paradasMark
+      paradasMark,
+      horariosVisible: false
     };
   }
 
@@ -181,16 +183,30 @@ export default class Home extends PureComponent {
   }
 
   render() {
+    const { horariosVisible } = this.state;
     return (
       <View style={styles.container}>
-        <Text>Horarios</Text>
+        <Button
+          title={"Horários"}
+          raised
+          containerStyle={{
+            backgroundColor: "#1e90ff",
+            marginVertical: 10,
+            marginHorizontal: 50
+          }}
+          onPress={() => this.setState({ horariosVisible: true })}
+        />
         <MapView
           rotateEnabled={false}
           showsUserLocation={true}
           showsMyLocationButton={true}
           customMapStyle={mapaStyle}
           style={[
-            { marginTop: this.state.marginTop, width: "100%", height: "65%" }
+            {
+              marginTop: this.state.marginTop,
+              width: "95%",
+              height: "65%"
+            }
           ]}
           onMapReady={() => this.setState({ marginTop: 0 })}
           region={{
@@ -234,17 +250,23 @@ export default class Home extends PureComponent {
             flexDirection: "row",
             flex: 1,
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
+            marginTop: 5
           }}
         >
           {this.renderBageLegends()}
         </View>
+        <HorariosModal
+          visible={horariosVisible}
+          onBackdropPress={() => this.setState({ horariosVisible: false })}
+        />
       </View>
     );
   }
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    alignItems: "center"
   }
 });
